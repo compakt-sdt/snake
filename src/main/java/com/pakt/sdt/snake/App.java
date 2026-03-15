@@ -63,7 +63,7 @@ public class App extends Application {
         startTime = LocalDateTime.now();
         // windows and linux uses forward slash for classpath resources
         stage.getIcons().add(new Image(
-                App.class.getResource("/icon/snake_32px.png")
+                App.class.getResource("/icon/snake-grey_512.png")
                         .toExternalForm()));
         stage.setScene(scene);
         stage.setTitle("Snake");
