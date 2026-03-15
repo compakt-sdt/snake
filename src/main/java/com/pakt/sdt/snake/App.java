@@ -3,7 +3,6 @@ package com.pakt.sdt.snake;
 import com.pakt.sdt.snake.hud.GameScore;
 import com.pakt.sdt.snake.hud.GameTimer;
 import com.pakt.sdt.snake.hud.SplashText;
-import java.nio.file.FileSystems;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +11,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import static javafx.scene.input.KeyCode.DOWN;
@@ -49,7 +49,6 @@ public class App extends Application {
     private final int FPS = 60;
     private final int MAX_SPEED = 3;
     private final int MIN_SPEED = 20;
-    private final String SEPARATOR = FileSystems.getDefault().getSeparator();
     
     private int speedLimiter = MIN_SPEED;
     private int snakeMovement = 0;
@@ -62,8 +61,9 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         initializeSceneGraph();
         startTime = LocalDateTime.now();
+        // windows and linux uses forward slash for classpath resources
         stage.getIcons().add(new Image(
-                App.class.getResource(SEPARATOR + "icon" + SEPARATOR + "snake_32px.png")
+                App.class.getResource("/icon/snake_32px.png")
                         .toExternalForm()));
         stage.setScene(scene);
         stage.setTitle("Snake");
@@ -222,19 +222,20 @@ public class App extends Application {
         root.getChildren().addAll(snake.get());
         scene = new Scene(root);
         scene.setFill(Color.BLACK);
+        scene.setCursor(Cursor.NONE);
         setSceneController();
     }
 
     private void initHud() {
         splashText = new SplashText("Press ENTER/SPACE To Start/Restart", 10.0, 25.0, 16.0, true,
-                SplashText.ColorStyle.GRADIENT, SEPARATOR + "font" + SEPARATOR + "Orbitron-Bold.ttf");
+                SplashText.ColorStyle.GRADIENT, "/font/Orbitron-Bold.ttf");
         // one color with font
 //        splashText = new SplashText("Press ENTER/SPACE To Start/Restart", 10.0, 25.0, 16.0, 
 //                Color.ORANGE, SEPARATOR + "font" + SEPARATOR + "Orbitron-Bold.ttf");
         var gameTimer = new GameTimer(
-                10.0, 15.0, 12.0, Color.color(1.0, 1.0, 1.0, 0.85), SEPARATOR + "font" + SEPARATOR + "Orbitron-Regular.ttf");
+                10.0, 15.0, 12.0, Color.color(1.0, 1.0, 1.0, 0.85), "/font/Orbitron-Regular.ttf");
         timer = gameTimer.get();
-        var gameScore = new GameScore(App.WIDTH - 88, 40.0, 32.0, SEPARATOR + "font" + SEPARATOR + "Orbitron-Bold.ttf");
+        var gameScore = new GameScore(App.WIDTH - 88, 40.0, 32.0, "/font/Orbitron-Bold.ttf");
         score = gameScore.get();
 
         root.getChildren().add(timer);
