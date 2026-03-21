@@ -1,8 +1,8 @@
 
-#Snake
+# Snake
 
 A simple desktop game application using JavaFX.
 
-##Font
+## Font
 
 This application is using [Orbitron](OFL.txt)
